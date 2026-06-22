@@ -102,7 +102,8 @@
   .rc-i{background:var(--teal)}
   .rc-s{background:var(--orange)}
   .rc-e{background:var(--green)}
-  .icon-svg{width:56px;height:56px;margin-bottom:14px}
+  .icon-emoji{font-size:3.4rem;margin-bottom:14px;line-height:1}
+  .modal .side .icon-emoji{font-size:2.6rem;margin:6px 0 4px}
   .rise-card .label{font-size:1.45rem;font-weight:800;margin-bottom:6px}
   .rise-card .role{font-size:.95rem;color:var(--gray);font-style:italic;margin-bottom:14px}
   .rise-card .desc{font-size:.98rem;color:var(--dark);font-weight:600;margin-top:auto;margin-bottom:16px}
@@ -174,20 +175,18 @@
 </head>
 <body>
 
-
 <nav class="nav-dots" aria-label="Slide navigation">
-  <a href="#s1" title="Title"></a>
-  <a href="#s3" title="Introduction"></a>
-  <a href="#s4" title="Misconceptions"></a>
-  <a href="#s5" title="Myth 1"></a>
-  <a href="#s6" title="Myth 2"></a>
-  <a href="#s7" title="Myth 3"></a>
-  <a href="#s8" title="Myth 4"></a>
-  <a href="#s9" title="RISE Intro"></a>
-  <a href="#s10" title="RISE Framework"></a>
-  <a href="#s15" title="Summary"></a>
+  #s1
+  #s3
+  " title="Misconceptions"></a>
+  #s5
+  #s6
+  #s7
+  #s8
+  #s9
+  #s10
+  #s15</a>
 </nav>
-
 
 <!-- ============ SLIDE 1: Title ============ -->
 <section class="slide" id="s1">
@@ -382,10 +381,7 @@
     <div class="rise-cards">
       <div class="rise-card r" data-key="R" tabindex="0" role="button">
         <div class="rise-circle rc-r">R</div>
-        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#FC2834" stroke-width="3" stroke-linecap="round">
-          <circle cx="32" cy="32" r="12"/>
-          <path d="M32 6v8 M32 50v8 M6 32h8 M50 32h8 M14 14l6 6 M44 44l6 6 M14 50l6-6 M44 20l6-6"/>
-        </svg>
+        <div class="icon-emoji">⚙️</div>
         <div class="label">Reduce Friction</div>
         <div class="role">AI as your Assistant</div>
         <div class="desc">Increase your personal productivity</div>
@@ -394,10 +390,7 @@
 
       <div class="rise-card i" data-key="I" tabindex="0" role="button">
         <div class="rise-circle rc-i">I</div>
-        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#43AAC7" stroke-width="3" stroke-linecap="round">
-          <path d="M6 44 L32 18 L58 44"/>
-          <path d="M6 54h52 M16 44v10 M26 44v10 M36 44v10 M46 44v10"/>
-        </svg>
+        <div class="icon-emoji">🧭</div>
         <div class="label">Increase Range</div>
         <div class="role">AI as your Tutor</div>
         <div class="desc">Expand your skillset beyond your core expertise</div>
@@ -406,10 +399,7 @@
 
       <div class="rise-card s" data-key="S" tabindex="0" role="button">
         <div class="rise-circle rc-s">S</div>
-        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#FEA000" stroke-width="3" stroke-linecap="round">
-          <circle cx="32" cy="16" r="6"/>
-          <path d="M32 24v14 M18 34l14-10 14 10 M14 52h36 M22 52v-10 M42 52v-10"/>
-        </svg>
+        <div class="icon-emoji">🧢</div>
         <div class="label">Strengthen Confidence</div>
         <div class="role">AI as your Coach</div>
         <div class="desc">Turn uncertainty into momentum</div>
@@ -418,11 +408,7 @@
 
       <div class="rise-card e" data-key="E" tabindex="0" role="button">
         <div class="rise-circle rc-e">E</div>
-        <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="#00AA59" stroke-width="3" stroke-linecap="round">
-          <circle cx="32" cy="22" r="4" fill="#00AA59"/>
-          <path d="M32 30v24 M22 54h20"/>
-          <path d="M22 22a10 10 0 0 1 20 0 M14 22a18 18 0 0 1 36 0 M6 22a26 26 0 0 1 52 0"/>
-        </svg>
+        <div class="icon-emoji">📢</div>
         <div class="label">Expand Impact</div>
         <div class="role">AI as your Amplifier</div>
         <div class="desc">Create more value from what you already know and do</div>
@@ -469,7 +455,7 @@
 <script>
 const modalData = {
   R: {
-    color:'#FC2834', letter:'R', title:'Reduce Friction',
+    color:'#FC2834', letter:'R', emoji:'⚙️', title:'Reduce Friction',
     role:'AI as your Assistant', desc:'Increase your personal productivity',
     bullets:[
       "Offload repetitive, administrative, or other low-value tasks and busy work that you don't enjoy.",
@@ -484,7 +470,7 @@ const modalData = {
     ]
   },
   I: {
-    color:'#43AAC7', letter:'I', title:'Increase Range',
+    color:'#43AAC7', letter:'I', emoji:'🧭', title:'Increase Range',
     role:'AI as your Tutor', desc:'Expand your skillset beyond your core expertise',
     bullets:[
       "Upskill into new areas that are complementary or adjacent to your core expertise.",
@@ -502,7 +488,7 @@ const modalData = {
     ]
   },
   S: {
-    color:'#FEA000', letter:'S', title:'Strengthen Confidence',
+    color:'#FEA000', letter:'S', emoji:'🧢', title:'Strengthen Confidence',
     role:'AI as your Coach', desc:'Turn uncertainty into momentum',
     bullets:[
       "Overcome analysis paralysis, get over writer's block, or have AI be your low-stakes test \"audience\" for constructive feedback.",
@@ -519,7 +505,7 @@ const modalData = {
     ]
   },
   E: {
-    color:'#00AA59', letter:'E', title:'Expand Impact',
+    color:'#00AA59', letter:'E', emoji:'📢', title:'Expand Impact',
     role:'AI as your Amplifier', desc:'Create more value from what you already know and do',
     bullets:[
       "Use AI as a thinking partner to expand on outlines, list solutions, brainstorm ideas, or structure a solution.",
@@ -544,6 +530,7 @@ function openModal(key){
     '<button class="close" aria-label="Close" id="modal-close">×</button>' +
     '<div class="side">' +
       '<div class="rise-circle" style="background:' + d.color + '">' + d.letter + '</div>' +
+      '<div class="icon-emoji">' + d.emoji + '</div>' +
       '<div style="font-size:1.4rem;font-weight:800;color:' + d.color + '">' + d.title + '</div>' +
       '<div class="role">' + d.role + '</div>' +
       '<div class="desc">' + d.desc + '</div>' +
