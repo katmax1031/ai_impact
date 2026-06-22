@@ -38,25 +38,23 @@
 
   .topbar{position:absolute;top:0;left:0;right:0;height:48px;background:var(--dark);z-index:1}
 
-  .section-tag{
-    display:inline-flex;align-items:center;gap:24px;
-    background:#fff;color:var(--dark);
-    padding:32px 60px;border-radius:8px;
-    font-weight:800;font-size:3rem;
-    margin-bottom:56px;border:4px solid var(--dark);
-  }
-  .section-tag .dot{width:32px;height:32px;border-radius:50%}
-  .arrow-svg{width:56px;height:56px;flex-shrink:0;stroke-width:3}
+
+.section-tag{
+  display:inline-flex;align-items:center;gap:24px;
+  background:#fff;color:var(--dark);
+  padding:32px 60px;border-radius:8px;
+  font-weight:800;font-size:3rem;
+  margin-bottom:56px;border:4px solid var(--dark);
+}
+.section-tag .dot{width:32px;height:32px;border-radius:50%}
+
+.arrow-svg{width:56px;height:56px;flex-shrink:0;stroke-width:3}
 
   h1{font-size:4rem;font-weight:800;line-height:1.05;letter-spacing:-1.5px;color:var(--dark)}
   h2{font-size:2.6rem;font-weight:800;margin-bottom:18px;line-height:1.15}
   p,li{font-size:1.05rem;color:var(--gray)}
 
   .nav-dots a span{display:block;width:100%;height:100%}
-
-  .nav-dots a.active{
-  background:var(--red);
-  }
 
   /* ===== Slide 1: Title ===== */
   #s1 h1{font-size:5rem}
@@ -215,7 +213,7 @@
   <div class="slide-content">
     <div class="title-block">
       <svg class="title-arrow" viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="3">
-        <path d="M18 6 L6 18 M6 6 L6 18 L18 18"/>
+        <path d="M6 18 L18 6 M6 6 L18 6 L18 18"/>
       </svg>
       <h1>Using AI to<br>Amplify Your Impact</h1>
     </div>
@@ -231,7 +229,7 @@
   <div class="slide-content">
     <div class="section-tag">
       <svg class="arrow-svg" viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="3">
-        <path d="M18 6 L6 18 M6 6 L6 18 L18 18"/>
+        <path d="M6 18 L18 6 M6 6 L18 6 L18 18"/>
       </svg>
       <span class="dot" style="background:var(--red)"></span>
       <span>Introduction</span>
@@ -377,7 +375,7 @@
   <div class="slide-content">
     <div class="section-tag">
       <svg class="arrow-svg" viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="3">
-        <path d="M18 6 L6 18 M6 6 L6 18 L18 18"/>
+        <path d="M6 18 L18 6 M6 6 L18 6 L18 18"/>
       </svg>
       <span class="dot" style="background:#C97B2A"></span>
       <span>RISE Framework</span>
@@ -440,7 +438,7 @@
   <div class="slide-content">
     <div class="section-tag">
       <svg class="arrow-svg" viewBox="0 0 24 24" fill="none" stroke="#231F20" stroke-width="3">
-        <path d="M18 6 L6 18 M6 6 L6 18 L18 18"/>
+        <path d="M6 18 L18 6 M6 6 L18 6 L18 18"/>
       </svg>
       <span class="dot" style="background:var(--green)"></span>
       <span>Summary</span>
@@ -567,38 +565,6 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     });
   });
-  document.getElementById('modal-bg').addEventListener('click', function(e){
-    if(e.target === this) closeModal();
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeModal();
-  });
-
-  // ===== Nav dot active state on scroll =====
-  const navLinks = document.querySelectorAll('.nav-dots a');
-  const sections = Array.from(navLinks)
-    .map(a => document.querySelector(a.getAttribute('href')))
-    .filter(Boolean);
-
-  const setActive = (id) => {
-    navLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-    });
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (visible[0]) setActive(visible[0].target.id);
-  }, {
-    rootMargin: '-40% 0px -50% 0px',
-    threshold: 0
-  });
-
-  sections.forEach(s => observer.observe(s));
-  if (sections[0]) setActive(sections[0].id);
-});
   document.getElementById('modal-bg').addEventListener('click', function(e){
     if(e.target === this) closeModal();
   });
