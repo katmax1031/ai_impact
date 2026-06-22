@@ -52,12 +52,6 @@
   h2{font-size:2.6rem;font-weight:800;margin-bottom:18px;line-height:1.15}
   p,li{font-size:1.05rem;color:var(--gray)}
 
-  .nav-dots a span{display:block;width:100%;height:100%}
-
-  .nav-dots a.active{
-  background:var(--red);
-  }
-
   /* ===== Slide 1: Title ===== */
   #s1 h1{font-size:5rem}
   #s1 .title-block{display:flex;align-items:flex-start;gap:24px;max-width:800px}
@@ -158,6 +152,7 @@
   }
   .dig-deeper a{color:#fff;text-decoration:underline;font-weight:600}
 
+  /* ===== Nav dots ===== */
   .nav-dots{
     position:fixed;right:22px;top:50%;transform:translateY(-50%);
     display:flex;flex-direction:column;gap:12px;z-index:50;
@@ -165,8 +160,11 @@
   .nav-dots a{
     width:11px;height:11px;border-radius:50%;background:rgba(0,0,0,.22);
     display:block;transition:background .2s, transform .2s;
+    font-size:0;text-decoration:none;
   }
+  .nav-dots a span{display:block;width:100%;height:100%}
   .nav-dots a:hover{background:var(--red);transform:scale(1.3)}
+  .nav-dots a.active{background:var(--red)}
 
   @media(max-width:900px){
     .rise-cards{grid-template-columns:repeat(2,1fr)}
@@ -182,16 +180,16 @@
 <body>
 
 <nav class="nav-dots" aria-label="Slide navigation">
-  <a href="#s1" title="Title"><span></span></a>
-  <a href="#s3" title="Introduction"><span></span></a>
-  <a href="#s4" title="Misconceptions"><span></span></a>
-  <a href="#s5" title="Myth 1"><span></span></a>
-  <a href="#s6" title="Myth 2"><span></span></a>
-  <a href="#s7" title="Myth 3"><span></span></a>
-  <a href="#s8" title="Myth 4"><span></span></a>
-  <a href="#s9" title="RISE Intro"><span></span></a>
-  <a href="#s10" title="RISE Framework"><span></span></a>
-  <a href="#s15" title="Summary"><span></span></a>
+  #s1
+  #s3
+  #s4
+  #s5
+  #s6
+  #s7
+  #s8
+  #s9
+  #s10
+  #s15
 </nav>
 
 <!-- ============ SLIDE 1: Title ============ -->
@@ -556,6 +554,7 @@ function closeModal(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
+  // ===== RISE card clicks =====
   document.querySelectorAll('.rise-card').forEach(function(card){
     card.addEventListener('click', function(){
       openModal(card.getAttribute('data-key'));
@@ -567,6 +566,8 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     });
   });
+
+  // ===== Modal close handlers =====
   document.getElementById('modal-bg').addEventListener('click', function(e){
     if(e.target === this) closeModal();
   });
@@ -577,34 +578,26 @@ document.addEventListener('DOMContentLoaded', function(){
   // ===== Nav dot active state on scroll =====
   const navLinks = document.querySelectorAll('.nav-dots a');
   const sections = Array.from(navLinks)
-    .map(a => document.querySelector(a.getAttribute('href')))
+    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
     .filter(Boolean);
 
-  const setActive = (id) => {
-    navLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+  function updateActiveDot(){
+    if(!sections.length) return;
+    var trigger = window.innerHeight * 0.4;
+    var current = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].getBoundingClientRect().top <= trigger) {
+        current = sections[i];
+      }
+    }
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
     });
-  };
+  }
 
-  const observer = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (visible[0]) setActive(visible[0].target.id);
-  }, {
-    rootMargin: '-40% 0px -50% 0px',
-    threshold: 0
-  });
-
-  sections.forEach(s => observer.observe(s));
-  if (sections[0]) setActive(sections[0].id);
-});
-  document.getElementById('modal-bg').addEventListener('click', function(e){
-    if(e.target === this) closeModal();
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeModal();
-  });
+  window.addEventListener('scroll', updateActiveDot, {passive:true});
+  window.addEventListener('resize', updateActiveDot);
+  updateActiveDot();
 });
 </script>
 
