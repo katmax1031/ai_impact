@@ -54,6 +54,10 @@
 
   .nav-dots a span{display:block;width:100%;height:100%}
 
+  .nav-dots a.active{
+  background:var(--red);
+  }
+
   /* ===== Slide 1: Title ===== */
   #s1 h1{font-size:5rem}
   #s1 .title-block{display:flex;align-items:flex-start;gap:24px;max-width:800px}
@@ -563,6 +567,38 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     });
   });
+  document.getElementById('modal-bg').addEventListener('click', function(e){
+    if(e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+
+  // ===== Nav dot active state on scroll =====
+  const navLinks = document.querySelectorAll('.nav-dots a');
+  const sections = Array.from(navLinks)
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (visible[0]) setActive(visible[0].target.id);
+  }, {
+    rootMargin: '-40% 0px -50% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(s => observer.observe(s));
+  if (sections[0]) setActive(sections[0].id);
+});
   document.getElementById('modal-bg').addEventListener('click', function(e){
     if(e.target === this) closeModal();
   });
